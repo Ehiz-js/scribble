@@ -3,27 +3,16 @@ import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
 import pg from "pg";
-const { Pool } = require("pg");
-
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL,
-	ssl: { rejectUnauthorized: false },
-});
-
-const res = await pool.query("SELECT * FROM users");
-console.log(res.rows);
 
 const app = express();
-const port = process.env.PORT || 3000;
-/* const db = new pg.Client({
-	connectionString:
-		process.env.DATABASE_URL ||
-		`postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
-	ssl:
-		process.env.NODE_ENV === "production"
-			? { rejectUnauthorized: false }
-			: undefined,
-}); */
+const port = 3000;
+const db = new pg.Client({
+	user: "postgres",
+	host: "localhost",
+	database: "scribble",
+	password: "ehizojie",
+	port: 5432,
+});
 
 db.connect();
 
@@ -31,7 +20,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-	const result = await pool.query("select * from books order by id desc");
+	const result = await db.query("select * from books order by id desc");
 	const books = result.rows;
 	const error = req.query.error;
 
@@ -48,7 +37,7 @@ app.post("/add", async (req, res) => {
 	const bio = req.body.bio;
 	const rating = Math.floor(Math.random() * 5) + 1;
 	try {
-		await pool.query(
+		await db.query(
 			"insert into books(isbn, title, author, rating, bio) values($1, $2, $3, $4, $5)",
 			[isbn, title, author, rating, bio]
 		);
@@ -68,7 +57,7 @@ app.post("/edit", async (req, res) => {
 	const author = req.body.author;
 	const isbn = req.body.isbn;
 	const bio = req.body.bio;
-	await pool.query(
+	await db.query(
 		"update books set title = $1, author = $2, isbn = $3, bio = $4 where isbn = $5",
 		[title, author, isbn, bio, isbn]
 	);
@@ -78,11 +67,11 @@ app.post("/edit", async (req, res) => {
 app.post("/delete", async (req, res) => {
 	const isbn = req.body.isbn;
 	console.log(isbn);
-	await pool.query("delete from books where isbn = $1", [isbn]);
+	await db.query("delete from books where isbn = $1", [isbn]);
 	res.redirect("/");
 });
 app.get("/sort-rating", async (req, res) => {
-	const result = await pool.query("select * from books order by rating desc");
+	const result = await db.query("select * from books order by rating desc");
 	const books = result.rows;
 
 	res.render("index.ejs", {
@@ -91,7 +80,7 @@ app.get("/sort-rating", async (req, res) => {
 });
 
 app.get("/sort-recency", async (req, res) => {
-	const result = await pool.query("select * from books order by id desc");
+	const result = await db.query("select * from books order by id desc");
 	const books = result.rows;
 
 	res.render("index.ejs", {
@@ -100,7 +89,7 @@ app.get("/sort-recency", async (req, res) => {
 });
 
 app.get("/sort-alphabet", async (req, res) => {
-	const result = await pool.query("select * from books order by title asc");
+	const result = await db.query("select * from books order by title asc");
 	const books = result.rows;
 
 	res.render("index.ejs", {
@@ -110,7 +99,7 @@ app.get("/sort-alphabet", async (req, res) => {
 
 app.post("/search", async (req, res) => {
 	const input = req.body.search;
-	const result = await pool.query(
+	const result = await db.query(
 		"select * from books where lower (title) like '%' || $1 || '%';",
 		[input.toLowerCase()]
 	);
