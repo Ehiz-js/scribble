@@ -5,7 +5,7 @@ import axios from "axios";
 import pg from "pg";
 
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 const db = new pg.Client({
 	connectionString: process.env.DATABASE_URL,
 	ssl: {
