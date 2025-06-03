@@ -107,7 +107,6 @@ app.get(
 	"/auth/google/callback",
 	passport.authenticate("google", { failureRedirect: "/" }),
 	(req, res) => {
-		req.login(newUser, (err) => {});
 		res.redirect("/");
 	}
 );
