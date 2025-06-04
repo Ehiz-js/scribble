@@ -107,14 +107,7 @@ app.get(
 	"/auth/google/callback",
 	passport.authenticate("google", { failureRedirect: "/" }),
 	(req, res) => {
-		req.login(newUser, (err) => {
-			if (err) {
-				console.error("Auto-login after signup failed:", err);
-				return res.redirect("/login?error=Login failed");
-			}
-			// successful login -> redirect to protected home
-			return res.redirect("/");
-		});
+		req.login(newUser, (err) => {});
 		res.redirect("/");
 	}
 );
