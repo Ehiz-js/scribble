@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Scribble</title>
+		<link rel="icon" type="image/x-icon" href="/images/logo.png" />
+		<link rel="stylesheet" href="styles/style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Allura&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/47496cab62.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<section id="header">
+			<h1>Scribble</h1>
+			<ul class="nav-links">
+				<li><a href="#">Home</a></li>
+				<li><a href="#add-post" class="addPostNav">Add Post</a></li>
+				<li>
+					<div class="dark-mode-container">
+						<i class="fa-solid fa-moon"></i>
+						<i class="fa-solid fa-sun" style="display: none"></i>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<section id="search-sort">
+			<form action="/search" method="POST">
+				<div id="search-container">
+					<input
+						type="text"
+						id="search"
+						name="search"
+						placeholder="<%=locals.error? error: 'Search through your library...' %> "
+						required
+					/>
+					<button type="submit">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</div>
+			</form>
+			<div id="sort-container">
+				<h2>Sort by:</h2>
+				<form action="/sort-rating" method="GET">
+					<button type="submit"><i class="fa-solid fa-star"></i></button>
+				</form>
+
+				<form action="/sort-recency" method="GET">
+					<button type="submit"><i class="fa-solid fa-clock"></i></button>
+				</form>
+				<form action="/sort-alphabet" method="GET">
+					<button type="submit">
+						<i class="fa-solid fa-arrow-down-a-z"></i>
+					</button>
+				</form>
+			</div>
+		</section>
+		<section id="library">
+			<div id="book-grid">
+				<% books.forEach(e=>{ %>
+				<form action="/show-edit" method="POST">
+					<input type="text" name="title" value="<%= e.title %>" hidden />
+					<input type="text" name="author" value="<%= e.author %>" hidden />
+					<input type="text" name="isbn" value="<%= e.isbn %>" hidden />
+					<input type="text" name="bio" value="<%= e.bio %>" hidden />
+
+					<div class="book-card">
+						<img
+							src="https://covers.openlibrary.org/b/isbn/<%= e.isbn %>-M.jpg"
+							alt=""
+							width="250px"
+							height="150px"
+						/>
+						<h2><%= e.title %></h2>
+						<div class="book-info">
+							<h3><%= e.author %></h3>
+							<div>
+								<button type="submit" class="pencil">
+									<i class="fa-solid fa-pencil editPostBtn"></i>
+								</button>
+								<i class="fa-solid fa-star"></i><span><%= e.rating %></span>
+							</div>
+						</div>
+						<button
+							type="button"
+							class="editBook"
+							onclick="readMore(<%= e.id %>)"
+						>
+							Read More
+						</button>
+					</div>
+				</form>
+				<%}) %>
+			</div>
+		</section>
+		<section id="add-post">
+			<form action="/add" method="POST" id="add-form">
+				<label for="add"
+					><h2>Add a Book</h2>
+					<i class="fa-solid fa-xmark addPostClose"></i
+				></label>
+				<div id="title-author">
+					<input
+						type="text"
+						name="title"
+						id="title"
+						placeholder="Book Title"
+						required
+					/>
+					<input
+						type="text"
+						name="author"
+						id="author"
+						placeholder="Book Author"
+						required
+					/>
+				</div>
+				<input
+					type="number"
+					name="isbn"
+					id="isbn"
+					placeholder="ISBN Number"
+					required
+				/>
+
+				<input
+					type="text"
+					name="bio"
+					id="bio"
+					placeholder="Describe the Book"
+					required
+				/>
+				<button type="submit" id="add-button">Add Book</button>
+			</form>
+		</section>
+
+		<% books.forEach((e)=>{ %>
+
+		<form action="/show-edit" method="POST">
+			<section class="B<%= e.id %>viewPost viewPost">
+				<form action="/delete" method="POST" id="delete">
+					<input type="text" name="title" value="<%= e.title %>" hidden />
+					<input type="text" name="author" value="<%= e.author %>" hidden />
+					<input type="text" name="isbn" value="<%= e.isbn %>" hidden />
+					<input type="text" name="bio" value="<%= e.bio %>" hidden />
+				</form>
+				<img
+					src="https://covers.openlibrary.org/b/isbn/<%= e.isbn %>-L.jpg"
+					alt="book-img"
+				/>
+				<div class="viewInfo">
+					<div class="viewRow1">
+						<h2><%= e.title %></h2>
+						<div>
+							<button type="submit" class="pencil2">
+								<i class="fa-solid fa-pencil editPostBtn2"></i>
+							</button>
+
+							<i class="fa-solid fa-xmark viewPostClose"></i>
+						</div>
+					</div>
+					<div class="viewRow2">
+						<h3>by</h3>
+						<h2><%= e.author %></h2>
+						<span><i class="fa-solid fa-star"></i><%= e.rating %></span>
+					</div>
+					<p class="viewBio"><%= e.bio %></p>
+				</div>
+			</section>
+		</form>
+		<% }) %>
+
+		<section id="footer"></section>
+		<script src="scripts/script.js"></script>
+	</body>
+</html>

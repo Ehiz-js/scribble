@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Scribble</title>
+		<link rel="icon" type="image/x-icon" href="/images/logo.png" />
+		<link rel="stylesheet" href="styles/style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Allura&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/47496cab62.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<section id="edit-post">
+			<form action="/delete" method="POST" id="delete">
+				<input type="text" name="title" value="<%= book.title %>" hidden />
+				<input type="text" name="author" value="<%= book.author %>" hidden />
+				<input type="text" name="isbn" value="<%= book.isbn %>" hidden />
+				<input type="text" name="bio" value="<%= book.bio %>" hidden />
+			</form>
+			<button form="delete" id="deleteBtn"></button>
+			<form action="/" method="GET" id="chai"></form>
+			<button form="chai" id="close"></button>
+			<form action="/edit" method="POST" id="edit-form">
+				<label for="close"
+					><h2>Edit a Book</h2>
+					<i class="fa-solid fa-xmark editPostClose"></i
+				></label>
+				<label for="deleteBtn" style="width: 100%"
+					><i class="fa-solid fa-trash" style="text-align: end"></i
+				></label>
+				<div id="title-author">
+					<input
+						type="text"
+						name="title"
+						id="title"
+						placeholder="Book Title"
+						required
+						value="<%= book.title  %>"
+					/>
+					<input
+						type="text"
+						name="author"
+						id="author"
+						placeholder="Book Author"
+						value="<%= book.author  %>"
+						required
+					/>
+				</div>
+				<input
+					type="text"
+					name="isbn"
+					id="isbn"
+					placeholder="ISBN Number"
+					value="<%= book.isbn %>"
+					required
+				/>
+				<textarea
+					rows="5"
+					type="text"
+					name="bio"
+					id="bio"
+					placeholder="Describe the Book"
+					required
+				>
+<%= book.bio %></textarea
+				>
+				<button type="submit" id="edit-button">Edit Book</button>
+			</form>
+		</section>
+		<script src="scripts/script.js"></script>
+	</body>
+</html>
