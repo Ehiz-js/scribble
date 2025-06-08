@@ -73,6 +73,7 @@
 				</form>
 			</div>
 		</section>
+		<% if (showH2) { %>
 		<h2
 			style="
 				display: flex;
@@ -84,6 +85,7 @@
 		>
 			Books to get you started...
 		</h2>
+		<% } %>
 		<section id="library">
 			<div id="book-grid">
 				<% books.forEach(e=>{ %>

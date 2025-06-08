@@ -125,7 +125,6 @@ app.get("/", ensureAuthenticated, async (req, res) => {
 	);
 	const books = result.rows;
 	const error = req.query.error;
-
 	res.render("index.ejs", {
 		books: books,
 		error: error,
