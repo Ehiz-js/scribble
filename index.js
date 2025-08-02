@@ -6,7 +6,7 @@ import pg from "pg";
 import { error } from "console";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 const db = new pg.Client({
 	connectionString:
 		process.env.DATABASE_URL ||
@@ -114,6 +114,6 @@ app.post("/search", async (req, res) => {
 	}
 });
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
 	console.log(`Server running on port ${port}`);
 });
