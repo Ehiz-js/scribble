@@ -6,7 +6,8 @@ import pg from "pg";
 const { Pool } = require("pg");
 
 const pool = new Pool({
-	connectionString: `postgresql://postgres:${process.env.DB_PASSWORD}@db.${process.env.DB_PROJECT_REF}.supabase.co:${process.env.DB_PORT}/postgres`,
+	connectionString: process.env.DATABASE_URL,
+	ssl: { rejectUnauthorized: false },
 });
 
 const res = await pool.query("SELECT * FROM users");
