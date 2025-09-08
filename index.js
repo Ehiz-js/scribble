@@ -3,18 +3,15 @@ import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
 import pg from "pg";
-import { error } from "console";
 
 const app = express();
 const port = 3000;
 const db = new pg.Client({
-	connectionString:
-		process.env.DATABASE_URL ||
-		`postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
-	ssl:
-		process.env.NODE_ENV === "production"
-			? { rejectUnauthorized: false }
-			: undefined,
+	user: "postgres",
+	host: "localhost",
+	database: "scribble",
+	password: "ehizojie",
+	port: 5432,
 });
 
 db.connect();
@@ -114,6 +111,6 @@ app.post("/search", async (req, res) => {
 	}
 });
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
 	console.log(`Server running on port ${port}`);
 });
