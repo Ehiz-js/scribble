@@ -6,6 +6,7 @@ let viewPost = document.querySelector(".viewPost");
 let library = document.querySelector("#library");
 let moon = document.querySelector(".fa-moon");
 let sun = document.querySelector(".fa-sun");
+let loginBtn = document.querySelector(".loginBtn");
 let card;
 
 addPostNav.addEventListener("click", () => {

@@ -751,3 +751,275 @@ input {
 	transform: scale(1.1);
 	color: #cc0000;
 }
+.login-page {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	/* Smooth retro gradient */
+	background: linear-gradient(
+		135deg,
+		var(--primary),
+		var(--secondary),
+		var(--accent)
+	);
+	background-size: 300% 300%;
+	animation: gradientFlow 18s ease infinite;
+}
+
+.login-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--font-body);
+	color: var(--text);
+}
+
+.login-container h2 {
+	font-family: var(--font-cursive);
+	font-size: 2.5rem;
+	color: var(--text);
+	margin-bottom: 2rem;
+}
+
+.login-container form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background-color: var(--secondary);
+	padding: 2rem 3rem;
+	border-radius: 20px;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+	width: 100%;
+	max-width: 400px;
+}
+
+.login-container input {
+	padding: 0.8rem 1rem;
+	border-radius: 10px;
+	border: 1px solid var(--accent);
+	font-size: 1rem;
+	color: var(--text);
+	font-family: var(--font-body);
+}
+
+.login-container input:focus {
+	outline: 2px solid var(--accent);
+}
+
+.login-container button {
+	padding: 0.8rem 1rem;
+	border-radius: 10px;
+	background-color: var(--accent);
+	color: white;
+	font-size: 1rem;
+	font-family: var(--font-heading);
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.4s ease;
+	text-align: center;
+}
+
+.login-container button:hover {
+	background-color: var(--text);
+	transform: scale(1.05);
+}
+
+.login-container a {
+	margin-top: 1rem;
+	font-size: 1rem;
+	font-family: var(--font-heading);
+	color: var(--secondary);
+	transition: color 0.3s ease;
+	background-color: white;
+	padding: 1rem;
+}
+
+.login-container a > i {
+	color: unset;
+}
+
+.login-container a:hover {
+	color: var(--text);
+	background-color: gray;
+}
+
+.sign-page {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	/* Smooth retro gradient */
+	background: linear-gradient(
+		135deg,
+		var(--primary),
+		var(--secondary),
+		var(--accent)
+	);
+	background-size: 300% 300%;
+	animation: gradientFlow 18s ease infinite;
+}
+
+.sign-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--font-body);
+	color: var(--text);
+}
+
+.sign-container h2 {
+	font-family: var(--font-cursive);
+	font-size: 2.5rem;
+	color: var(--text);
+	margin-bottom: 2rem;
+}
+
+.sign-container form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background-color: var(--secondary);
+	padding: 2rem 3rem;
+	border-radius: 20px;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+	width: 100%;
+	max-width: 400px;
+}
+
+.sign-container input {
+	padding: 0.8rem 1rem;
+	border-radius: 10px;
+	border: 1px solid var(--accent);
+	font-size: 1rem;
+	color: var(--text);
+	font-family: var(--font-body);
+}
+
+.sign-container input:focus {
+	outline: 2px solid var(--accent);
+}
+
+.sign-container button {
+	padding: 0.8rem 1rem;
+	border-radius: 10px;
+	background-color: var(--accent);
+	color: white;
+	font-size: 1rem;
+	font-family: var(--font-heading);
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.4s ease;
+	text-align: center;
+}
+
+.sign-container button:hover {
+	background-color: var(--text);
+	transform: scale(1.05);
+}
+
+.sign-container a {
+	margin-top: 1rem;
+	font-size: 1rem;
+	font-family: var(--font-heading);
+	color: var(--secondary);
+	transition: color 0.3s ease;
+	background-color: white;
+	padding: 1rem;
+}
+
+.sign-container a > i {
+	color: unset;
+}
+
+.sign-container a:hover {
+	color: var(--text);
+	background-color: gray;
+}
+/* Fullscreen welcome page with gradient background */
+.welcome-page {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, var(--primary), var(--text));
+	background-size: 200% 200%;
+	animation: gradientShift 12s ease infinite;
+	font-family: "Montserrat", sans-serif;
+}
+
+/* Gradient animation */
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.welcome-container {
+	text-align: center;
+	color: white;
+	max-width: 500px;
+	padding: 2rem;
+}
+
+.welcome-container h1 {
+	font-size: 2.8rem;
+	margin-bottom: 1rem;
+	font-family: "Allura", cursive;
+	text-align: center;
+}
+
+.welcome-container p {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+	font-family: "Open Sans", sans-serif;
+}
+
+.welcome-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+}
+
+/* Buttons */
+.btn {
+	display: inline-block;
+	padding: 0.8rem 2rem;
+	border-radius: 8px;
+	font-size: 1rem;
+	text-decoration: none;
+	background: var(--primary);
+	color: var(--secondary);
+	transition: all 0.3s ease;
+	font-weight: bold;
+	border: none;
+}
+
+.btn:hover {
+	background: var(--primary);
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
+/* Outline button */
+.btn-outline {
+	background: transparent;
+	border: 2px solid var(--primary);
+	color: var(--primary);
+}
+
+.btn-outline:hover {
+	background: white;
+	color: #2575fc;
+}

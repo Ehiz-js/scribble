@@ -30,6 +30,11 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="#add-post" class="addPostNav">Add Post</a></li>
 				<li>
+					<a href="/logout"
+						>Logout <i class="fa-solid fa-right-from-bracket"></i
+					></a>
+				</li>
+				<li>
 					<div class="dark-mode-container">
 						<i class="fa-solid fa-moon"></i>
 						<i class="fa-solid fa-sun" style="display: none"></i>
@@ -68,6 +73,17 @@
 				</form>
 			</div>
 		</section>
+		<h2
+			style="
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 3rem;
+				font-style: Open Sans;
+			"
+		>
+			Books to get you started...
+		</h2>
 		<section id="library">
 			<div id="book-grid">
 				<% books.forEach(e=>{ %>
@@ -106,6 +122,7 @@
 				<%}) %>
 			</div>
 		</section>
+
 		<section id="add-post">
 			<form action="/add" method="POST" id="add-form">
 				<label for="add"
